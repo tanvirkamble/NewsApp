@@ -1,96 +1,111 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import NewsItem from './NewsItem';
+import defaultImg from './img/logo512.png';
+import Loading from './Loading';
 
 export default class NewsComponent extends Component {
-  articles = [
-    {
-      id: 1,
-      source: { id: 'espn-cric-info', name: 'ESPN Cric Info' },
-      author: null,
-      title:
-        'PCB hands Umar Akmal three-year ban from all cricket | ESPNcricinfo.com',
-      description:
-        'Penalty after the batsman pleaded guilty to not reporting corrupt approaches | ESPNcricinfo.com',
-      url: 'http://www.espncricinfo.com/story/_/id/29103103/pcb-hands-umar-akmal-three-year-ban-all-cricket',
-      urlToImage:
-        'https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1099495_800x450.jpg',
-      publishedAt: '2020-04-27T11:41:47Z',
-      content:
-        "Umar Akmal's troubled cricket career has hit its biggest roadblock yet, with the PCB handing him a ban from all representative cricket for three years after he pleaded guilty of failing to report det… [+1506 chars]",
-    },
-    {
-      id: 2,
-      source: { id: 'espn-cric-info', name: 'ESPN Cric Info' },
-      author: null,
-      title:
-        'What we learned from watching the 1992 World Cup final in full again | ESPNcricinfo.com',
-      description:
-        'Wides, lbw calls, swing - plenty of things were different in white-ball cricket back then | ESPNcricinfo.com',
-      url: 'http://www.espncricinfo.com/story/_/id/28970907/learned-watching-1992-world-cup-final-full-again',
-      urlToImage:
-        'https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1219926_1296x729.jpg',
-      publishedAt: '2020-03-30T15:26:05Z',
-      content:
-        'Last week, we at ESPNcricinfo did something we have been thinking of doing for eight years now: pretend-live ball-by-ball commentary for a classic cricket match. We knew the result, yes, but we tried… [+6823 chars]',
-    },
-    {
-      id: 3,
-      source: { id: 'espn-cric-info', name: 'ESPN Cric Info' },
-      author: null,
-      title:
-        'PCB hands Umar Akmal three-year ban from all cricket | ESPNcricinfo.com',
-      description:
-        'Penalty after the batsman pleaded guilty to not reporting corrupt approaches | ESPNcricinfo.com',
+  static defaultProps = {
+    COUNTRY: 'in',
+    pageSize: 9,
+    CATEGORY: 'general',
+  };
+  static propTypes = {
+    COUNTRY: PropTypes.string,
+    pageSize: PropTypes.number,
+    CATEGORY: PropTypes.string,
+  };
 
-      url: 'http://www.espncricinfo.com/story/_/id/29103103/pcb-hands-umar-akmal-three-year-ban-all-cricket',
-
-      urlToImage:
-        'https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1099495_800x450.jpg',
-      publishedAt: '2020-04-27T11:41:47Z',
-      content:
-        "Umar Akmal's troubled cricket career has hit its biggest roadblock yet, with the PCB handing him a ban from all representative cricket for three years after he pleaded guilty of failing to report det… [+1506 chars]",
-    },
-    {
-      id: 4,
-      source: { id: 'espn-cric-info', name: 'ESPN Cric Info' },
-      author: null,
-      title:
-        'What we learned from watching the 1992 World Cup final in full again | ESPNcricinfo.com',
-      description:
-        'Wides, lbw calls, swing - plenty of things were different in white-ball cricket back then | ESPNcricinfo.com',
-      url: 'http://www.espncricinfo.com/story/_/id/28970907/learned-watching-1992-world-cup-final-full-again',
-      urlToImage:
-        'https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1219926_1296x729.jpg',
-      publishedAt: '2020-03-30T15:26:05Z',
-      content:
-        'Last week, we at ESPNcricinfo did something we have been thinking of doing for eight years now: pretend-live ball-by-ball commentary for a classic cricket match. We knew the result, yes, but we tried… [+6823 chars]',
-    },
-  ];
   constructor() {
     super();
     console.log('hello i am a constuctor from news component');
     this.state = {
-      articles: this.articles,
+      //   articles: this.articles,
+      articles: [],
       loading: false,
+      page: 1, // Initialize the page property
     };
   }
 
   async componentDidMount() {
     console.log('cdm');
-    let url =
-      'https://newsapi.org/v2/top-headlines?country=in&apiKey=14575940aef442f9bd66f8959ac14dd7';
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.COUNTRY}&category=${this.props.CATEGORY}&apiKey=868871d32bf143f3ad4b3839a337fd14&page=${this.state.page}&pageSize=${this.props.pageSize}
+`;
+    this.setState({ loading: true });
+
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    console.log(parsedData);
+    this.setState({
+      articles: parsedData.articles,
+      totalArticles: parsedData.totalResults,
+      loading: false,
+    });
+    //no need of this set of func as for limitations of articles pageSize exists
+    // Slice the array to limit the number of articles to 15
+    // const limitedArticles = parsedData.articles.slice(
+    //   0,
+    //   parsedData.totalResults > 15 ? 15 : parsedData.totalResults
+    // );
+    // this.setState({ articles: limitedArticles });
+  }
+
+  handlePrevbtn = async () => {
+    console.log('prev btn');
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.COUNTRY
+    }&category=${
+      this.props.CATEGORY
+    }&apiKey=868871d32bf143f3ad4b3839a337fd14&page=${
+      this.state.page - 1
+    }&pageSize=${this.props.pageSize}
+`;
+    this.setState({ loading: true });
+
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
     this.setState({ articles: parsedData.articles });
-  }
+    this.setState({
+      page: this.state.page - 1,
+      articles: parsedData.articles,
+      loading: false,
+    });
+  };
+  handleNextbtn = async () => {
+    console.log('next btn');
 
+    if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / 9))) {
+      console.log(this.state.page);
+      let url = `https://newsapi.org/v2/top-headlines?country=${
+        this.props.COUNTRY
+      }&category=${
+        this.props.CATEGORY
+      }&apiKey=868871d32bf143f3ad4b3839a337fd14&page=${
+        this.state.page + 1
+      }&pageSize=${this.props.pageSize}`;
+      this.setState({ loading: true });
+      let data = await fetch(url);
+      let parsedData = await data.json();
+      console.log(parsedData);
+      this.setState({ articles: parsedData.articles });
+      this.setState({
+        page: this.state.page + 1,
+        articles: parsedData.articles,
+        loading: false,
+      });
+    }
+  };
   render() {
     return (
       <div>
         {console.log('render')}
         <div className="container my-3">
-          <h2>MonkeyNews - top headlines</h2>
+          <h2 className="text-center" style={{ margin: '40px 0px' }}>
+            MonkeyNews - top headlines
+          </h2>
+          {this.state.loading && <Loading />}
           <div className="row">
             {this.state.articles.map((e) => {
               return (
@@ -121,11 +136,7 @@ export default class NewsComponent extends Component {
                         : 'No description'
                     }
                     // imgUrl={e.urlToImage ? e.urlToImage : '/public/logo512.png'}
-                    imgUrl={
-                      !e.urlToImage
-                        ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSstxSvgVZ-b4WUi4NvSRvwp4E2LTN7wOfvog&usqp=CAU'
-                        : e.urlToImage
-                    }
+                    imgUrl={!e.urlToImage ? defaultImg : e.urlToImage}
                     altText={e.title || 'Default Image Alt Text'}
                     newsUrl={e.url}
                   />
@@ -133,6 +144,32 @@ export default class NewsComponent extends Component {
               );
             })}
           </div>
+        </div>
+        <div
+          className="container d-flex justify-content-between"
+          style={{ marginBottom: '2.5%' }}>
+          <button
+            className="btn btn-dark"
+            onClick={this.handlePrevbtn}
+            disabled={this.state.page <= 1}>
+            &larr; prev
+          </button>
+          <p
+            style={{
+              border: '3px solid black',
+              padding: '4px 8px',
+              marginTop: '2.5%',
+            }}>
+            {this.state.page}
+          </p>
+          <button
+            disabled={
+              this.state.page > this.state.totalArticles / this.props.pageSize
+            }
+            className="btn btn-dark"
+            onClick={this.handleNextbtn}>
+            next &rarr;
+          </button>
         </div>
       </div>
     );
