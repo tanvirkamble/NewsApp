@@ -3,13 +3,7 @@ import './App.css';
 import React, { Component } from 'react';
 import NavBar from './components/NavBar';
 import NewsComponent from './components/NewsComponent';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Routes,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default class App extends Component {
   // C = 'jhon';
