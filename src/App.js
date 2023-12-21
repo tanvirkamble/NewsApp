@@ -6,13 +6,12 @@ import NewsComponent from './components/NewsComponent';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default class App extends Component {
-  // C = 'jhon';
+  Api_Key = process.env.REACT_APP_API_KEY;
   render() {
     return (
       <div>
         <Router>
           <NavBar />
-          {/* <h1> my name is {this.C}</h1> */}
           <Routes>
             <Route
               path="/"
@@ -22,6 +21,7 @@ export default class App extends Component {
                   COUNTRY={'in'}
                   CATEGORY={'general'}
                   key="general"
+                  RequiredApi={this.Api_Key}
                 />
               }
             />
@@ -33,6 +33,7 @@ export default class App extends Component {
                   COUNTRY={'in'}
                   CATEGORY={'technology'}
                   key="technology"
+                  RequiredApi={this.Api_Key}
                 />
               }
             />
@@ -44,6 +45,7 @@ export default class App extends Component {
                   COUNTRY={'in'}
                   CATEGORY={'science'}
                   key="science"
+                  RequiredApi={this.Api_Key}
                 />
               }
             />
@@ -55,6 +57,7 @@ export default class App extends Component {
                   COUNTRY={'in'}
                   CATEGORY={'business'}
                   key="business"
+                  RequiredApi={this.Api_Key}
                 />
               }
             />
@@ -66,6 +69,7 @@ export default class App extends Component {
                   COUNTRY={'in'}
                   CATEGORY={'entertainment'}
                   key="entertainment"
+                  RequiredApi={this.Api_Key}
                 />
               }
             />
@@ -77,6 +81,7 @@ export default class App extends Component {
                   COUNTRY={'in'}
                   CATEGORY={'sports'}
                   key="sports"
+                  RequiredApi={this.Api_Key}
                 />
               }
             />
@@ -88,6 +93,7 @@ export default class App extends Component {
                   COUNTRY={'in'}
                   CATEGORY={'health'}
                   key="health"
+                  RequiredApi={this.Api_Key}
                 />
               }
             />
