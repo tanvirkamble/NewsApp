@@ -91,40 +91,6 @@ export default class NewsComponent extends Component {
     this.UpdateNews();
   };
 
-  // handlePrevbtn = async () => {
-  //   console.log('prev btn');
-
-  //   this.setState({ page: this.state.page - 1 });
-  //   this.UpdateNews();
-  // };
-  // handleNextbtn = async () => {
-  //   console.log('next btn');
-
-  //   console.log('next btn');
-
-  //   this.setState(
-  //     (prevState) => ({ page: prevState.page + 1 }),
-  //     () => this.UpdateNews()
-  //   );
-  // };
-
-  // handleFirstPage = async () => {
-  //   console.log('first btn');
-
-  //   this.setState({ page: 1 });
-  //   this.UpdateNews();
-  // };
-
-  // handleLastPage = async () => {
-  //   console.log('last btn');
-
-  //   const totalPages = Math.ceil(
-  //     this.state.totalArticlesByCategory[this.props.CATEGORY] /
-  //       this.props.pageSize
-  //   );
-  //   this.setState({ page: totalPages }, () => this.UpdateNews());
-  // };
-
   render() {
     if (this.state.apiError) {
       console.log('Error occurred. Rendering ERROR component');
@@ -176,47 +142,6 @@ export default class NewsComponent extends Component {
             </div>
           </div>
         </InfiniteScroll>
-
-        {/* <div
-          className="container d-flex justify-content-between"
-          style={{ marginBottom: '2.5%' }}>
-          <button
-            className="btn btn-dark"
-            onClick={this.handleFirstPage}
-            disabled={this.state.page <= 1}>
-            &larr; first
-          </button>
-          <button
-            className="btn btn-dark"
-            onClick={this.handlePrevbtn}
-            disabled={this.state.page <= 1}>
-            &larr; prev
-          </button>
-          <p
-            style={{
-              border: '3px solid black',
-              padding: '4px 8px',
-              marginTop: '2.5%',
-            }}>
-            {this.state.page}
-          </p>
-          <button
-            disabled={
-              this.state.page > this.state.totalArticles / this.props.pageSize
-            }
-            className="btn btn-dark"
-            onClick={this.handleNextbtn}>
-            next &rarr;
-          </button>
-          <button
-            disabled={
-              this.state.page === this.state.totalArticles / this.props.pageSize
-            }
-            className="btn btn-dark"
-            onClick={this.handleLastPage}>
-            last &rarr;
-          </button>
-        </div> */}
       </div>
     );
   }
