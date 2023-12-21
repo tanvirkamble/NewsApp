@@ -18,7 +18,7 @@ export default class App extends Component {
               path="/"
               element={
                 <NewsComponent
-                  pageSize={9}
+                  pageSize={5}
                   COUNTRY={'in'}
                   CATEGORY={'general'}
                   key="general"
@@ -29,7 +29,7 @@ export default class App extends Component {
               path="/technology"
               element={
                 <NewsComponent
-                  pageSize={9}
+                  pageSize={5}
                   COUNTRY={'in'}
                   CATEGORY={'technology'}
                   key="technology"
@@ -40,7 +40,7 @@ export default class App extends Component {
               path="/science"
               element={
                 <NewsComponent
-                  pageSize={9}
+                  pageSize={5}
                   COUNTRY={'in'}
                   CATEGORY={'science'}
                   key="science"
@@ -51,7 +51,7 @@ export default class App extends Component {
               path="/business"
               element={
                 <NewsComponent
-                  pageSize={9}
+                  pageSize={5}
                   COUNTRY={'in'}
                   CATEGORY={'business'}
                   key="business"
@@ -62,7 +62,7 @@ export default class App extends Component {
               path="/entertainment"
               element={
                 <NewsComponent
-                  pageSize={9}
+                  pageSize={5}
                   COUNTRY={'in'}
                   CATEGORY={'entertainment'}
                   key="entertainment"
@@ -73,7 +73,7 @@ export default class App extends Component {
               path="/sports"
               element={
                 <NewsComponent
-                  pageSize={9}
+                  pageSize={5}
                   COUNTRY={'in'}
                   CATEGORY={'sports'}
                   key="sports"
@@ -84,7 +84,7 @@ export default class App extends Component {
               path="/health"
               element={
                 <NewsComponent
-                  pageSize={9}
+                  pageSize={5}
                   COUNTRY={'in'}
                   CATEGORY={'health'}
                   key="health"
