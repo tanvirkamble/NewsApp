@@ -31,6 +31,7 @@ export const NewsItem = (props) => {
             href={newsUrl}
             onClick={() => console.log(newsUrl)}
             target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-sm btn-primary">
             read more
           </a>
