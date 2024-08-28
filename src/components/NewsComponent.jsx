@@ -58,6 +58,7 @@ const NewsComponent = (props) => {
 
   useEffect(() => {
     UpdateNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const fetchMoreData = () => {
