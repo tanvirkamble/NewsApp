@@ -1,4 +1,4 @@
-import LoadingGif from './img/Gear.gif';
+import LoadingGif from '../img/Gear.gif';
 
 import React from 'react';
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import NewsItem from './NewsItem';
-import defaultImg from './img/logo512.png';
+import defaultImg from '../img/logo512.png';
 import Loading from './Loading';
 import ERROR from './errorMsg';
 
